@@ -1,3 +1,5 @@
+//// KAIROS ////
+
 const headers = {
   app_id: "e8f3158e",
   app_key: "4ea59d811ef35b9d747f233d4ab6db11",
@@ -27,6 +29,8 @@ export function enrollImage(img) {
     })
   }).then(res => res.json());
 }
+
+//// ARTSY ////
 
 export function getArtsyToken() {
   return fetch("https://api.artsy.net/api/tokens/xapp_token", {
