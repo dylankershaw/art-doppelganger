@@ -2,12 +2,12 @@ import { connect } from "react-redux";
 import Webcam from "react-webcam";
 import React, { Component } from "react";
 
-import { getDogpelganger } from "../actions";
+import { getDoppelganger } from "../actions";
 
 class WebcamContainer extends Component {
   handleClick = () => {
     const screenshot = this.webcam.getScreenshot();
-    this.props.getDogpelganger(screenshot);
+    this.props.getDoppelganger(screenshot);
   };
 
   render() {
@@ -25,4 +25,4 @@ class WebcamContainer extends Component {
   }
 }
 
-export default connect(null, { getDogpelganger })(WebcamContainer);
+export default connect(null, { getDoppelganger })(WebcamContainer);

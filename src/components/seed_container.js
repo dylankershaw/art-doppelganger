@@ -1,39 +1,71 @@
 import { connect } from "react-redux";
-import Webcam from "react-webcam";
 import React, { Component } from "react";
 
-import { seedImage } from "../actions";
+import { authenticateArtsy, seedImage } from "../actions";
 
 class SeedContainer extends Component {
   constructor() {
     super();
 
     this.state = {
-      seedValue: ""
+      seedValue: "",
+      artsyValue: ""
     };
   }
 
-  handleChange = ev => {
+  componentDidMount() {
+    this.props.authenticateArtsy();
+  }
+
+  handleSeedChange = ev => {
     this.setState({ seedValue: ev.target.value });
   };
 
-  handleSubmit = ev => {
+  handleSeedSubmit = ev => {
     ev.preventDefault();
     this.props.seedImage(this.state.seedValue);
     this.setState({ seedValue: "" });
   };
 
+  handleArtsyChange = ev => {
+    this.setState({ artsyValue: ev.target.value });
+  };
+
+  handleArtsySubmit = ev => {
+    ev.preventDefault();
+    console.log(this.props.artsy);
+    // this.props.seedImage(this.state.seedValue);
+    this.setState({ artsyValue: "" });
+  };
+
   render() {
     return (
       <div>
-        <button onClick={this.handleClick}>TAKE PHOTO</button>
-        <form onSubmit={this.handleSubmit}>
-          <label>SEED INPUT</label>
-          <input value={this.state.seedValue} onChange={this.handleChange} />
+        <form onSubmit={this.handleSeedSubmit}>
+          <label>KAIROS SEED INPUT (can be URL or Base64)</label>
+          <input
+            value={this.state.seedValue}
+            onChange={this.handleSeedChange}
+          />
+        </form>
+        <br />
+        <br />
+        <form onSubmit={this.handleArtsySubmit}>
+          <label>ARTSY SHOW INPUT</label>
+          <input
+            value={this.state.artsyValue}
+            onChange={this.handleArtsyChange}
+          />
         </form>
       </div>
     );
   }
 }
 
-export default connect(null, { seedImage })(SeedContainer);
+function mapStateToProps({ artsy }) {
+  return { artsy };
+}
+
+export default connect(mapStateToProps, { seedImage, authenticateArtsy })(
+  SeedContainer
+);

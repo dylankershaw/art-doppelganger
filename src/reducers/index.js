@@ -1,11 +1,11 @@
 import { combineReducers } from "redux";
 
 import humanReducer from "./human";
-import dogReducer from "./dog";
+import artsyReducer from "./artsy";
 
 const rootReducer = combineReducers({
-  dog: dogReducer,
-  human: humanReducer
+  human: humanReducer,
+  artsy: artsyReducer
 });
 
 export default rootReducer;
