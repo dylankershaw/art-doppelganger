@@ -4,12 +4,12 @@ import React from "react";
 
 import { getDogpelganger } from "../actions";
 
-const handleClick = ({ getDogpelganger }) => {
-  const screenshot = this.webcam.getScreenshot();
-  getDogpelganger(screenshot);
-};
+const WebcamContainer = ({ getDogpelganger }) => {
+  const handleClick = () => {
+    const screenshot = this.webcam.getScreenshot();
+    getDogpelganger(screenshot);
+  };
 
-const WebcamContainer = () => {
   return (
     <div>
       <Webcam
