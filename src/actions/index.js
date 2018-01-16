@@ -8,3 +8,9 @@ export function getDogpelganger(img) {
     apiHelpers.recognize(img).then(resp => console.log(resp));
   };
 }
+
+export function seedImage(img) {
+  return function(dispatch) {
+    apiHelpers.enrollImage(img).then(resp => console.log(resp));
+  };
+}

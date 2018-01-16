@@ -11,3 +11,15 @@ export function recognize(img) {
     body: JSON.stringify({ image: img, gallery_name: "Dogs" })
   }).then(res => res.json());
 }
+
+export function enrollImage(img) {
+  return fetch("https://api.kairos.com/enroll", {
+    headers: headers,
+    method: "POST",
+    body: JSON.stringify({
+      image: img,
+      subject_id: Date.now(),
+      gallery_name: "Dogs"
+    })
+  }).then(res => res.json());
+}
