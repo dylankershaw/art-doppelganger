@@ -17,7 +17,7 @@ class WebcamContainer extends Component {
           audio={false}
           ref={node => (this.webcam = node)}
           screenshotFormat="image/jpeg"
-          height="10"
+          height="100"
         />
         <button onClick={this.handleClick}>TAKE PHOTO</button>
       </div>

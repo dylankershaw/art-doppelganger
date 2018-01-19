@@ -1,3 +1,20 @@
+import cloudinary from "cloudinary";
+
+//// CLOUDINARY ////
+
+export function cloudinaryUploader(img) {
+  return cloudinary.v2.uploader.unsigned_upload(
+    img,
+    "art-doppelganger-unsigned",
+    {
+      cloud_name: "dkershaw"
+    },
+    function (error, result) {
+      return result;
+    }
+  );
+}
+
 //// KAIROS ////
 
 const headers = {
@@ -18,13 +35,15 @@ export function recognize(img) {
   }).then(res => res.json());
 }
 
-export function enrollImage(img) {
+// enrolls image with the id returned by cloudinary
+export function enrollImage(img, id) {
+  console.log("ID: ", id)
   return fetch("https://api.kairos.com/enroll", {
     headers: headers,
     method: "POST",
     body: JSON.stringify({
       image: img,
-      subject_id: Date.now(),
+      subject_id: id,
       gallery_name: "Paintings"
     })
   }).then(res => res.json());

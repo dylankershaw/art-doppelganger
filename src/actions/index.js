@@ -7,7 +7,7 @@ export const SET_HUMAN = "SET_HUMAN";
 //// KAIROS ////
 
 export function getDoppelganger(img) {
-  return function(dispatch) {
+  return function (dispatch) {
     apiHelpers
       .recognize(img)
       .then(resp => console.log(resp.images[0].candidates[0].subject_id));
@@ -15,16 +15,20 @@ export function getDoppelganger(img) {
   };
 }
 
+// uploads to cloudinary and enrolls to kairos
 export function seedImage(img) {
-  return function(dispatch) {
-    apiHelpers.enrollImage(img).then(resp => console.log(resp));
+  return function (dispatch) {
+    apiHelpers.cloudinaryUploader(img)
+      // enrolls image to kairos with cloudinary url id
+      .then(resp => apiHelpers.enrollImage(img, resp.url.split("/upload/")[1])
+        .then(resp => console.log(resp)))
   };
 }
 
 //// ARTSY ////
 
 export function authenticateArtsy() {
-  return function(dispatch) {
+  return function (dispatch) {
     apiHelpers.getArtsyToken().then(resp => {
       return dispatch({
         type: SET_ARTSY_TOKEN,

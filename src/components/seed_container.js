@@ -42,7 +42,7 @@ class SeedContainer extends Component {
     return (
       <div>
         <form onSubmit={this.handleSeedSubmit}>
-          <label>KAIROS SEED INPUT (can be URL or Base64)</label>
+          <label>CLOUDINARY & KAIROS SEED INPUT (url)</label>
           <input
             value={this.state.seedValue}
             onChange={this.handleSeedChange}
