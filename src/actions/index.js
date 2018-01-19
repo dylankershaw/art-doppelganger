@@ -29,20 +29,24 @@ export function authenticateArtsy() {
 
 //// DOPPELGANGER ////
 
+// sends screenshot to kairos then sets it to store
 export function getDoppelganger(img) {
   return function (dispatch) {
-    apiHelpers
-      .recognize(img)
-      // set this subject_id to store so its image can be pulled from cloudinary
-      .then(resp => setDoppelganger(resp.images[0].candidates[0].subject_id));
-  };
-}
+    apiHelpers.recognize(img).then(resp => {
+      if (resp.images && resp.images[0].candidates) {
+        const subjectId = resp.images[0].candidates[0].subject_id
 
-export function setDoppelganger(id) {
-  return function (dispatch) {
-    return dispatch({
-      type: SET_DOPPELGANGER,
-      payload: "http://res.cloudinary.com/dkershaw/image/upload/" + id
+        apiHelpers.getSubject(subjectId)
+          .then(resp => {
+            console.log(resp)
+            return dispatch({
+              type: SET_DOPPELGANGER,
+              payload: { url: "http://res.cloudinary.com/dkershaw/image/upload/" + subjectId }
+            })
+          })
+      } else {
+        console.log("no doppelganger found")
+      }
     })
-  }
+  };
 }

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 
+import DoppelgangerContainer from './components/doppelganger_container'
 import WebcamContainer from "./components/webcam_container";
 import SeedContainer from "./components/seed_container";
 
@@ -9,6 +10,7 @@ class App extends Component {
       <div>
         <WebcamContainer />
         <SeedContainer />
+        <DoppelgangerContainer />
       </div>
     );
   }
