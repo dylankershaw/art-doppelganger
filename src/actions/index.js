@@ -4,16 +4,7 @@ export const SET_DOPPELGANGER = "SET_DOPPELGANGER";
 export const SET_ARTSY_TOKEN = "SET_ARTSY_TOKEN";
 export const SET_HUMAN = "SET_HUMAN";
 
-//// KAIROS ////
-
-export function getDoppelganger(img) {
-  return function (dispatch) {
-    apiHelpers
-      .recognize(img)
-      .then(resp => console.log(resp.images[0].candidates[0].subject_id));
-    // set this subject_id to store so its image can be pulled from cloudinary
-  };
-}
+//// SEEDS ////
 
 // uploads to cloudinary and enrolls to kairos
 export function seedImage(img) {
@@ -25,8 +16,6 @@ export function seedImage(img) {
   };
 }
 
-//// ARTSY ////
-
 export function authenticateArtsy() {
   return function (dispatch) {
     apiHelpers.getArtsyToken().then(resp => {
@@ -36,4 +25,24 @@ export function authenticateArtsy() {
       });
     });
   };
+}
+
+//// DOPPELGANGER ////
+
+export function getDoppelganger(img) {
+  return function (dispatch) {
+    apiHelpers
+      .recognize(img)
+      // set this subject_id to store so its image can be pulled from cloudinary
+      .then(resp => setDoppelganger(resp.images[0].candidates[0].subject_id));
+  };
+}
+
+export function setDoppelganger(id) {
+  return function (dispatch) {
+    return dispatch({
+      type: SET_DOPPELGANGER,
+      payload: "http://res.cloudinary.com/dkershaw/image/upload/" + id
+    })
+  }
 }
