@@ -59,15 +59,3 @@ export function getSubject(id) {
     subject_id: id
   }).then(res => res.json())
 }
-
-//// ARTSY ////
-
-export function getArtsyToken() {
-  return fetch("https://api.artsy.net/api/tokens/xapp_token", {
-    method: "POST",
-    body: JSON.stringify({
-      client_id: "d0bfd4fee4de4539f4ad",
-      client_secret: "86818d55193775149b3f977cad6fa521"
-    })
-  }).then(res => res.json());
-}

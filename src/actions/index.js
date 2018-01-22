@@ -1,7 +1,6 @@
 import * as apiHelpers from "../api";
 
 export const SET_DOPPELGANGER = "SET_DOPPELGANGER";
-export const SET_ARTSY_TOKEN = "SET_ARTSY_TOKEN";
 export const SET_HUMAN = "SET_HUMAN";
 
 //// SEEDS ////
@@ -13,17 +12,6 @@ export function seedImage(img) {
       // enrolls image to kairos with cloudinary url id
       .then(resp => apiHelpers.enrollImage(img, resp.url.split("/upload/")[1])
         .then(resp => console.log(resp)))
-  };
-}
-
-export function authenticateArtsy() {
-  return function (dispatch) {
-    apiHelpers.getArtsyToken().then(resp => {
-      return dispatch({
-        type: SET_ARTSY_TOKEN,
-        payload: resp.token
-      });
-    });
   };
 }
 

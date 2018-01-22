@@ -1,7 +1,7 @@
 import { connect } from "react-redux";
 import React, { Component } from "react";
 
-import { authenticateArtsy, seedImage } from "../actions";
+import { seedImage } from "../actions";
 
 class SeedContainer extends Component {
   constructor() {
@@ -9,12 +9,7 @@ class SeedContainer extends Component {
 
     this.state = {
       seedValue: "",
-      artsyValue: ""
     };
-  }
-
-  componentDidMount() {
-    this.props.authenticateArtsy();
   }
 
   handleSeedChange = ev => {
@@ -25,17 +20,6 @@ class SeedContainer extends Component {
     ev.preventDefault();
     this.props.seedImage(this.state.seedValue);
     this.setState({ seedValue: "" });
-  };
-
-  handleArtsyChange = ev => {
-    this.setState({ artsyValue: ev.target.value });
-  };
-
-  handleArtsySubmit = ev => {
-    ev.preventDefault();
-    console.log(this.props.artsy);
-    // this.props.seedImage(this.state.seedValue);
-    this.setState({ artsyValue: "" });
   };
 
   render() {
@@ -50,22 +34,11 @@ class SeedContainer extends Component {
         </form>
         <br />
         <br />
-        <form onSubmit={this.handleArtsySubmit}>
-          <label>ARTSY SHOW INPUT</label>
-          <input
-            value={this.state.artsyValue}
-            onChange={this.handleArtsyChange}
-          />
-        </form>
       </div>
     );
   }
 }
 
-function mapStateToProps({ artsy }) {
-  return { artsy };
-}
-
-export default connect(mapStateToProps, { seedImage, authenticateArtsy })(
+export default connect({ seedImage })(
   SeedContainer
 );
