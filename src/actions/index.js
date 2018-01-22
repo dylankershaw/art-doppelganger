@@ -1,5 +1,6 @@
 import * as apiHelpers from "../api";
 
+export const CLEAR_DOPPELGANGER = "CLEAR_DOPPELGANGER"
 export const SET_DOPPELGANGER = "SET_DOPPELGANGER";
 export const SET_HUMAN = "SET_HUMAN";
 
@@ -29,11 +30,15 @@ export function getDoppelganger(img) {
             console.log(resp)
             return dispatch({
               type: SET_DOPPELGANGER,
-              payload: { url: "http://res.cloudinary.com/dkershaw/image/upload/" + subjectId }
+              payload: { found: true, url: "http://res.cloudinary.com/dkershaw/image/upload/" + subjectId }
             })
           })
       } else {
         console.log("no doppelganger found")
+        return dispatch({
+          type: CLEAR_DOPPELGANGER,
+          payload: { found: false, url: "" }
+        })
       }
     })
   };

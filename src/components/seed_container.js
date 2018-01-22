@@ -39,6 +39,6 @@ class SeedContainer extends Component {
   }
 }
 
-export default connect({ seedImage })(
+export default connect(null, { seedImage })(
   SeedContainer
 );
